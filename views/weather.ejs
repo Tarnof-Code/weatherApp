@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://kit.fontawesome.com/3aa8e66588.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+
+    <title>WeatherApp</title>
+</head>
+
+<body>
+
+
+    <!-- HEADER -->
+    <nav class=" header navbar navbar-light bg-dark">
+        Weather App
+        <a class="logout" href="/users/logout">Deconnexion</a>
+    </nav>
+
+
+
+
+
+
+    <!-- champs de recherche -->
+    <div class="container">
+        <div class="row">
+            <form action="/add-city" method="post" id="champBouton" class="col-12 col-lg-6 offset-lg-6">
+                <input id="champs" type="text" name="name" placeholder="enter city name">
+                <button type="submit" class="btn btn-warning">Add</button>
+            </form>
+        </div>
+
+
+        <!-- Map + Infos-->
+
+        <!-- Map -->
+
+        <div class="row">
+            <div id="worldmap" class="col-12 col-lg-6"></div>
+
+            <div class="col-12 col-lg-6 text-end">
+                <!-- Error Message -->
+                <p id="update" class="font-weight-bold text-danger">
+                    <%= errorMsg %>
+                </p>
+                <!-- Update data-->
+                <a href="/update-data">
+                    <p id="update" class="font-weight-bold">Actualiser<i class="fa-solid fa-arrows-rotate ml-2"></i></p>
+                </a>
+                <!-- Infos Villes-->
+
+                <!-- <ul class="list-group ">                        
+                        <% for(i=0; i<cityList.length;i++){ %>
+
+                        <li data-name= "<%= cityList[i].name%>" data-lat="<%= cityList[i].lat %>" data-lon="<%= cityList[i].lon %>"  class="d-flex list-group-item font-weight-bold ville">
+                            <p class="mr-5 mt-auto mb-auto"><%= cityList[i].name %></p>
+                                <div class="mr-5 pt-auto group">
+                                    <p class="ml-4 mr-2 pt-3"><%= cityList[i].temps%></p>   
+                                    <img src="<%= cityList[i].picto %>" class=" mx-2"> 
+                                    <span class="badge badge-pill badge-warning px-3"><%= cityList[i].tMax %>°C</span>
+                                    <span class="badge badge-pill badge-secondary mx-2 px-3" ><%= cityList[i].tMin %>°C</span>    
+                                </div>
+                               
+                                <a href="delete-city?name=<%= cityList[i].name %>"><i class="fa-regular fa-circle-xmark text-warning mr-3"></i></a>                                
+                        </li>
+                        <%}%>
+                        <p id="vide"><%if(cityList.length == 0){ %>La liste de villes est vide</p>
+                        <% } %>                        
+                    </ul> -->
+
+                <ul class="card list-group list-group-flush">
+
+                    <% for(i=0; i<cityList.length;i++){ %>
+
+                        <li data-name="<%= cityList[i].name%>" data-lat="<%= cityList[i].lat %>"
+                            data-lon="<%= cityList[i].lon %>" 
+                            class="list-group-item p-3 d-flex align-items-center ville">
+                            <!-- Nom de la ville -->
+                            <p class="mb-0 me-3">
+                                <%= cityList[i].name %>
+                            </p>
+                            <!-- Picto + température -->
+                            <div id="group" class="d-flex align-items-center m-auto px-2">
+
+                                <p class="mb-0">
+                                    <%= cityList[i].temps%>
+                                </p>
+                                <!-- Icon du temps -->
+                                <img src="<%= cityList[i].picto %>" class="px-3">
+
+                                <div>
+                                    <span class="badge rounded-pill bg-warning text-dark">
+                                        <%= cityList[i].tMax %>°C
+                                    </span>
+
+                                    <span class="badge rounded-pill badge-secondary">
+                                        <%= cityList[i].tMin %>°C
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Supression du temps -->
+                            <a href="delete-city?name=<%= cityList[i].name %>"><i
+                                    class="fa-regular fa-circle-xmark ms-auto" style="color:#fec107;"></i></a>
+
+                        </li>
+                        <%}%>
+
+
+
+
+
+                </ul>
+                <p id="vide">
+                    <%if(cityList.length==0){ %>La liste de villes est vide
+                </p>
+                <% } %>
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <!-- GRID -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="/javascripts/script.js"></script>
+</body>
+
+</html>
