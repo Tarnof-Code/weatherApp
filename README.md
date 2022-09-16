@@ -7,7 +7,6 @@ Application web permettant d’afficher la météo de villes préalablement choi
 <li>Architecture MVC</li>
 <li>Bootstrap</li>
 <li>Intégration d'une map</li>
-<li>Postman</li>
 <li>API Open Weather Map</li>
 <li>Mongo DB</li>
 <li>Librairie Leaflet</li>
