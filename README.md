@@ -3,8 +3,6 @@ Application web permettant d’afficher la météo de villes préalablement choi
 <br>
 <li>HTML</li>
 <li>CSS</li>
-<li>EJS</li>
-<li>Node.JS</li>
 <li>Express.JS</li>
 <li>Architecture MVC</li>
 <li>Bootstrap</li>
