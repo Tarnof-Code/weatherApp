@@ -1,5 +1,5 @@
 # Weather App
-Application permettant d’afficher la météo de villes préalablement choisies.
+Application web permettant d’afficher la météo de villes préalablement choisies.
 <br>
 <li>HTML</li>
 <li>CSS</li>
