@@ -11,8 +11,4 @@ Application web permettant d’afficher la météo de villes préalablement choi
 <li>Mongo DB</li>
 <li>Librairie Leaflet</li>
 <br>
-<H3>Lien vers le site</H3>
-https://tarnof-weatherapp.herokuapp.com/
-<H4>Identifiants pour le sign-in:</H4>
-Email: john@doe.com <br>
-Mot de passe: johndoe
+
